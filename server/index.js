@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Answer API requests.
 app.post('/db',function(req,res){
+  console.log(req);
   id_user = req.body.id_user;
   var searched = req.body.searched;
   var cur_date=new Date();
@@ -31,15 +32,16 @@ app.post('/db',function(req,res){
         assert.equal(null, err);
         assert.equal(1, r.insertedCount);
       });
-
+var msg="";
     if (searches.find(
       {
        // $and: [
          // { "searched": searched }, { "id_user": { $ne: id_user }, }
         //]
       }
-    )) { res.send("FOUND") }
+    )) { msg="FOUND" }
     db.close();
+    res.send(msg);
 })})
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {

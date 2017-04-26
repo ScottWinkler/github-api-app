@@ -23,18 +23,24 @@ function createFormData(input) {
                 data.append(property, value);
             }
         }
-        return data;
+    
     }
+        return data;
 }
 export function userFetchData(input,id_user,callback) {
     return (dispatch) => {
         dispatch(homeLoading(true))
-        var data=createFormData({searched:input,id_user});
+        console.log(input);
+        console.log(id_user);
+
+        var data=createFormData({searched:input,id_user:id_user});
+        console.log(data);
         fetch('/db',{method:'POST', body:data})
       .then(response => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
         }
+
        console.log(response);})
       .catch(e => {
         console.log(e);
