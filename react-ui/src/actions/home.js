@@ -7,7 +7,9 @@ export function setActiveUser(user){
         user
     }
 }
-function createFormData(input) {
+
+export function logSearch(input) {
+    return (dispatch)=>{
     var values = input || {};
     var data = new FormData();
     for (var property in values) {
@@ -25,27 +27,25 @@ function createFormData(input) {
         }
     
     }
-        return data;
-}
-export function userFetchData(input,id_user,callback) {
-    return (dispatch) => {
-        dispatch(homeLoading(true))
-        console.log(input);
-        console.log(id_user);
-
-        var data=createFormData({searched:input,id_user:id_user});
-        console.log(data);
-        fetch('/db',{method:'POST', body:data})
+     fetch('/db',{method:'POST', body:data})
       .then(response => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
         }
-
-       console.log(response);})
+         console.log(response);
+        dispatch(homeError("UNIQUE_SEARCH"))
+    })
       .catch(e => {
         console.log(e);
+        dispatch(homeError("NOT_UNIQUE_SEARCH"));
       })
     
+}
+}
+export function userFetchData(input,id_user,callback) {
+    return (dispatch) => {
+        dispatch(homeLoading(true))
+        var data=logSearch({searched:input,id_user:id_user});
         var gh = new GitHub();
         var name = gh.getUser(input);
         name.getProfile()
