@@ -10,7 +10,7 @@ var url = 'mongodb://root:1234@ds121091.mlab.com:21091/heroku_10j3swtz';
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
 // Answer API requests.
-app.push('/db',function(req,res){
+app.post('/db',function(req,res){
   id_user = req.body.id_user;
   var searched = req.body.searched;
   var cur_date=new Date();
