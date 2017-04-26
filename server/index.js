@@ -11,6 +11,8 @@ app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 //app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Answer API requests.
+
+
 app.post('/db',function(req,res){
   res.setHeader('Content-Type', 'text/plain')
   console.log(req.body);

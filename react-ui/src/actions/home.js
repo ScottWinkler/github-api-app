@@ -13,8 +13,9 @@ export function logSearch(input,id_user) {
     var data=JSON.stringify({
         id_user:id_user,
         searched:input
-    })
-     fetch('/db',{method:'POST', body:data})
+    });
+    console.log(data);
+     fetch('/db',{method:'POST', body:data,headers: { 'Content-Type': 'application/json' }})
       .then(response => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
