@@ -51,8 +51,7 @@ app.post('/db', function (req, res) {
     })
       db.close();
       console.log(msg);
-      res.setHeader('Content-Type', 'application/json');
-    res.send({msg:}msg);
+    res.send(msg);
   })
 })
 // All remaining requests return the React app, so it can handle routing.
