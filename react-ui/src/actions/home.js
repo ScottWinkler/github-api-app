@@ -7,8 +7,8 @@ export function setActiveUser(user){
         user
     }
 }
-function createFormData(values) {
-    values = input || {};
+function createFormData(input) {
+    var values = input || {};
     var data = new FormData();
     for (var property in values) {
         //console.log(property);
