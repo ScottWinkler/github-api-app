@@ -16,7 +16,6 @@ export function logSearch(input, id_user) {
         });
         console.log(data);
         fetch('/db', { method: 'POST', body: data, headers: { 'Content-Type': 'application/json' } })
-            .then(res => res.json())
             .then(data => {
                 console.log(data)
                 if (data === "NOT_UNIQUE_SEARCH") {
