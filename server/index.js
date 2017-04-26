@@ -41,15 +41,16 @@ app.post('/db', function (req, res) {
         searched: searched,
         date:{$gt:cur_date-1000*60*2}
       }
-    ).count()
-    if(count>=1){
-      msg = "NOT_UNIQUE_SEARCH";
-    }
+    ).toArray(function(err, documents) {
+        if(documents.length>=1){
+           msg = "NOT_UNIQUE_SEARCH";
+        }
+    console.log(documents);
       db.close();
       console.log(msg);
     res.send(msg);
   })
-})
+})})
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {
   response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
