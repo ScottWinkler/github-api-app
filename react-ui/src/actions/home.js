@@ -17,14 +17,13 @@ export function logSearch(input, id_user) {
         console.log(data);
         fetch('/db', { method: 'POST', body: data, headers: { 'Content-Type': 'application/json' } })
             .then(data => {
-                console.log(data)
-                var body = data.body;
-                console.log(body);
-                var text = body.text();
-                console.log(text);
+                data.text().then((text)=>{
+                        console.log(text);
                 if (text === "NOT_UNIQUE_SEARCH") {
                     dispatch(homeError("NOT_UNIQUE_SEARCH"));
                 }
+                })
+                
             })
             .catch(e => console.log(e))
     }

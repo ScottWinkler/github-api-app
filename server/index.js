@@ -35,20 +35,16 @@ app.post('/db', function (req, res) {
         assert.equal(1, r.insertedCount);
       });
     var msg = "UNIQUE_SEARCH";
-    searches.find().forEach((row) => {
-      var lessThanTwoMinutes= (Math.round((cur_date - row.date) / 60000) < 2) ;
-      console.log(lessThanTwoMinutes);
-      var idsDifferent=id_user !== row.id_user;
-      console.log(idsDifferent);
-      var sameSearch= searched === row.searched
-      console.log(sameSearch);
-      console.log("----------")
-      if (
-       lessThanTwoMinutes&&idsDifferent&&sameSearch
-      ) {
-        msg = "NOT_UNIQUE_SEARCH"
+    var count=searches.find(
+      {
+        id_user:{$ne:id_user},
+        searched: searched,
+        date:{$gt:cur_date-1000*60*2}
       }
-    })
+    ).count()
+    if(count>=1){
+      msg = "NOT_UNIQUE_SEARCH";
+    }
       db.close();
       console.log(msg);
     res.send(msg);
