@@ -36,10 +36,11 @@ app.post('/db', function (req, res) {
       });
     var msg = "UNIQUE_SEARCH";
     if (searches.find().forEach((row) => {
+      console.log(row);
       if (
         (Math.round((cur_date - row.date) / 60000) < 2) &&
-        id_user != row.id_user &&
-        searched == row.searched
+        id_user !== row.id_user &&
+        searched === row.searched
       ) {
         msg = "NOT_UNIQUE_SEARCH"
       }

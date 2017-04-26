@@ -8,29 +8,23 @@ export function setActiveUser(user){
     }
 }
 
-export function logSearch(input,id_user) {
-    return (dispatch)=>{
-    var data=JSON.stringify({
-        id_user:id_user,
-        searched:input
-    });
-    console.log(data);
-     fetch('/db',{method:'POST', body:data,headers: { 'Content-Type': 'application/json' }})
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`status ${response.status}`);
-        } 
-        console.log(response);
-        var body=response.body;
-         console.log(body);
-         if(body==="NOT_UNIQUE_SEARCH"){
-          dispatch(homeError("NOT_UNIQUE_SEARCH"));}
-    })
-      .catch(e => {
-        console.log(e);
-      })
-    
-}
+export function logSearch(input, id_user) {
+    return (dispatch) => {
+        var data = JSON.stringify({
+            id_user: id_user,
+            searched: input
+        });
+        console.log(data);
+        fetch('/db', { method: 'POST', body: data, headers: { 'Content-Type': 'application/json' } })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data === "NOT_UNIQUE_SEARCH") {
+                    dispatch(homeError("NOT_UNIQUE_SEARCH"));
+                }
+            })
+            .catch(e => console.log(e))
+    }
 }
 export function userFetchData(input,id_user,callback) {
     return (dispatch) => {
