@@ -38,8 +38,9 @@ app.post('/db', function (req, res) {
     var count=searches.find(
       {
         id_user:{$ne:id_user},
-        searched: searched,
-        date:{$gt:cur_date-1000*60*2}
+        searched: searched
+        //,
+        //date:{$gt:cur_date-1000*60*2}
       }
     ).toArray(function(err, documents) {
         if(documents.length>=1){
