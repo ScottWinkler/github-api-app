@@ -30,6 +30,7 @@ handleAlertShow(){
 handleClick(){
  var self = this;
 this.props.acknowledgeError(null);
+this.setState({alertVisible:false});
  this.props.addUser(this.state.text_input,this.props.id_user, self.handleAlertShow);
  this.setState({text_input:""});
 }

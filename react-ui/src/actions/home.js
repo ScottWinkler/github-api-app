@@ -19,12 +19,15 @@ export function logSearch(input,id_user) {
       .then(response => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
-        }
-         console.log(response);
+        } 
+        console.log(response);
+        var body=response.body;
+         console.log(body);
+         if(body==="NOT_UNIQUE_SEARCH"){
+          dispatch(homeError("NOT_UNIQUE_SEARCH"));}
     })
       .catch(e => {
         console.log(e);
-        dispatch(homeError("NOT_UNIQUE_SEARCH"));
       })
     
 }

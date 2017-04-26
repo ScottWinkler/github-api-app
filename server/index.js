@@ -14,7 +14,6 @@ app.use(bodyParser.json());
 
 
 app.post('/db', function (req, res) {
-  res.setHeader('Content-Type', 'text/plain')
   console.log(req.body);
   var id_user = req.body.id_user;
   var searched = req.body.searched;
@@ -47,6 +46,7 @@ app.post('/db', function (req, res) {
     }
     ))
       db.close();
+      console.log(msg);
     res.send(msg);
   })
 })
