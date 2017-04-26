@@ -1,0 +1,12 @@
+
+.ListChart{
+    overflow-y: scroll;
+     font-size: larger; 
+  margin-left:0px;
+    padding-left:0px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.ListChart-Table{
+    width:100%;
+}

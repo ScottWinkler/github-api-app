@@ -1,0 +1,18 @@
+.Home-ul{
+    list-style-type: none;
+    margin-left:0px;
+    padding-left:0px;
+}
+.Home-Grid{
+    margin:20px 0px 0px 20px;
+}
+.Home-Row{
+    padding-left:0px;
+    margin:20px
+
+}
+.Home-Col{
+    text-align: left;
+    padding-left:0px;
+    padding-right:0px;
+}

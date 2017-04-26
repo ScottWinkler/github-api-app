@@ -1,0 +1,13 @@
+.UserListItem-Selected{
+    background-color: #999;
+}
+.UserListItem-Glyph{
+    float: right;
+}
+.UserListItem{
+    padding-left:20px;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
