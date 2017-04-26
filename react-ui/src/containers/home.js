@@ -1,6 +1,6 @@
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {userFetchData,setActiveUser} from '../actions/home.js';
+import {userFetchData,setActiveUser,homeError} from '../actions/home.js';
 import Home from '../components/home/home.js'
 
 const mapStateToProps=(state)=>{
@@ -16,7 +16,8 @@ return{
 const mapDispatchToProps = (dispatch) =>{
     return{
         addUser:  bindActionCreators(userFetchData,dispatch),
-        selectUser: bindActionCreators(setActiveUser,dispatch)
+        selectUser: bindActionCreators(setActiveUser,dispatch),
+        acknowledgeError: bindActionCreators(homeError,dispatch)
     }
 };
 

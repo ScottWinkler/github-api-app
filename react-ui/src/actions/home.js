@@ -21,7 +21,6 @@ export function logSearch(input,id_user) {
           throw new Error(`status ${response.status}`);
         }
          console.log(response);
-        dispatch(homeError("UNIQUE_SEARCH"))
     })
       .catch(e => {
         console.log(e);

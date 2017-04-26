@@ -13,14 +13,12 @@ app.use(bodyParser.json());
 // Answer API requests.
 
 
-app.post('/db',function(req,res){
+app.post('/db', function (req, res) {
   res.setHeader('Content-Type', 'text/plain')
   console.log(req.body);
   var id_user = req.body.id_user;
   var searched = req.body.searched;
-  console.log(id_user);
-  console.log(id_searched);
-  var cur_date=new Date();
+  var cur_date = new Date();
   MongoClient.connect(url, function (err, db) {
     assert.equal(null, err);
     // Insert a single document
@@ -37,17 +35,21 @@ app.post('/db',function(req,res){
         assert.equal(null, err);
         assert.equal(1, r.insertedCount);
       });
-var msg="UNIQUE_SEARCH";
-    if (searches.find(
-      {
-       // $and: [
-         // { "searched": searched }, { "id_user": { $ne: id_user }, }
-        //]
+    var msg = "UNIQUE_SEARCH";
+    if (searches.find().forEach((row) => {
+      if (
+        (Math.round((cur_date - row.date) / 60000) < 2) &&
+        id_user != row.id_user &&
+        searched == row.searched
+      ) {
+        msg = "NOT_UNIQUE_SEARCH"
       }
-    )) { msg="NOT_UNIQUE_SEARCH" }
-    db.close();
+    }
+    ))
+      db.close();
     res.send(msg);
-})})
+  })
+})
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {
   response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));

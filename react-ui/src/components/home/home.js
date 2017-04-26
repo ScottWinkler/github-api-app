@@ -19,7 +19,7 @@ render(){
         <div className="Home">
             <Grid className="Home-Grid">
                 <Row>
-                    <AddUser error={this.props.error} addUser={this.props.addUser} loading={this.props.loading} id_user={this.props.id_user} />
+                    <AddUser error={this.props.error} addUser={this.props.addUser} loading={this.props.loading} id_user={this.props.id_user} acknowledgeError={this.props.acknowledgeError}/>
                 </Row>
                 <Row className="Home-Row">
                     <Col xs={6} md={4} className="Home-Col">

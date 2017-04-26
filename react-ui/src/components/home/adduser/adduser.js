@@ -17,6 +17,7 @@ constructor(props){
 
 handleAlertDismiss(){
     this.setState({alertVisible:false});
+    this.props.acknowledgeError(null);
 }
 handleAlertShow(){
     this.setState({alertVisible:true});
@@ -28,6 +29,7 @@ handleAlertShow(){
     }
 handleClick(){
  var self = this;
+this.props.acknowledgeError(null);
  this.props.addUser(this.state.text_input,this.props.id_user, self.handleAlertShow);
  this.setState({text_input:""});
 }
@@ -45,7 +47,7 @@ handleClick(){
                     {" "}
                     {this.props.loading===true ? <Spinner className="AddUser-Spinner" spinnerName="circle" noFadeIn/> : null}
                 </Form>
-                {this.state.alertVisible ? <AlertDismissable handleAlertDismiss={this.handleAlertDismiss} /> : null}
+                {this.state.alertVisible ? <AlertDismissable handleAlertDismiss={this.handleAlertDismiss} error={this.props.error}/> : null}
             </div>
 
         )}
