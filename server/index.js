@@ -17,7 +17,9 @@ app.post('/db', function (req, res) {
   console.log(req.body);
   var id_user = req.body.id_user;
   var searched = req.body.searched;
-  var cur_date = new IsoDate();
+  var cur_date = new Date();
+  var two_minutes_ago=new Date(cur_date-2*60*1000);
+  console.log(two_minutes_ago);
   MongoClient.connect(url, function (err, db) {
     assert.equal(null, err);
     // Insert a single document
@@ -39,7 +41,7 @@ app.post('/db', function (req, res) {
       {
         id_user:{$ne:id_user},
         searched: searched,
-        date:{$gt:new Date(new Date().getTime()-60*2*1000).toISOString()}
+        date:{$gt:two_minutes_ago}
       }
     ).toArray(function(err, documents) {
         if(documents.length>=1){
