@@ -44,8 +44,8 @@ export function logSearch(input) {
 }
 export function userFetchData(input,id_user,callback) {
     return (dispatch) => {
-        dispatch(homeLoading(true))
-        var data=logSearch({searched:input,id_user:id_user});
+        dispatch(homeLoading(true));
+        dispatch(logSearch({searched:input,id_user:id_user}));
         var gh = new GitHub();
         var name = gh.getUser(input);
         name.getProfile()
