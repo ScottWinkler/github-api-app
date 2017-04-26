@@ -25,6 +25,7 @@ function createFormData(values) {
         }
         return data;
     }
+}
 export function userFetchData(input,id_user,callback) {
     return (dispatch) => {
         dispatch(homeLoading(true))
