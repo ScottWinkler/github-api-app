@@ -7,10 +7,29 @@ export function setActiveUser(user){
         user
     }
 }
+function createFormData(values) {
+    values = input || {};
+    var data = new FormData();
+    for (var property in values) {
+        //console.log(property);
+        if (values.hasOwnProperty(property)) {
+            var value = values[property];
+            if (value instanceof Array) {
+                for (var i = 0, l = value.length; i < l; i++) {
+                    data.append(property, value[i]);
+                }
+            }
+            else {
+                data.append(property, value);
+            }
+        }
+        return data;
+    }
 export function userFetchData(input,id_user,callback) {
     return (dispatch) => {
         dispatch(homeLoading(true))
-        fetch('/search',{method:'GET'})
+        var data=createFormData({searched:input,id_user});
+        fetch('/db',{method:'POST', body:data})
       .then(response => {
         if (!response.ok) {
           throw new Error(`status ${response.status}`);
