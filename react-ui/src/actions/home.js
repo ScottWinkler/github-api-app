@@ -8,25 +8,12 @@ export function setActiveUser(user){
     }
 }
 
-export function logSearch(input) {
+export function logSearch(input,id_user) {
     return (dispatch)=>{
-    var values = input || {};
-    var data = new FormData();
-    for (var property in values) {
-        //console.log(property);
-        if (values.hasOwnProperty(property)) {
-            var value = values[property];
-            if (value instanceof Array) {
-                for (var i = 0, l = value.length; i < l; i++) {
-                    data.append(property, value[i]);
-                }
-            }
-            else {
-                data.append(property, value);
-            }
-        }
-    
-    }
+    var data=JSON.stringify({
+        id_user:id_user,
+        searched:input
+    })
      fetch('/db',{method:'POST', body:data})
       .then(response => {
         if (!response.ok) {
@@ -45,7 +32,7 @@ export function logSearch(input) {
 export function userFetchData(input,id_user,callback) {
     return (dispatch) => {
         dispatch(homeLoading(true));
-        dispatch(logSearch({searched:input,id_user:id_user}));
+        dispatch(logSearch(input,id_user));
         var gh = new GitHub();
         var name = gh.getUser(input);
         name.getProfile()
