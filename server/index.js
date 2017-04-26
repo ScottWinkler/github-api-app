@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 5000;
 var url = 'mongodb://root:1234@ds121091.mlab.com:21091/heroku_10j3swtz';
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 // Answer API requests.
 app.post('/db',function(req,res){
   id_user = req.body.id_user;
