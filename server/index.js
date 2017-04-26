@@ -35,23 +35,24 @@ app.post('/db', function (req, res) {
         assert.equal(1, r.insertedCount);
       });
     var msg = "UNIQUE_SEARCH";
-    if (searches.find().forEach((row) => {
+    searches.find().forEach((row) => {
       var lessThanTwoMinutes= (Math.round((cur_date - row.date) / 60000) < 2) ;
       console.log(lessThanTwoMinutes);
       var idsDifferent=id_user !== row.id_user;
       console.log(idsDifferent);
       var sameSearch= searched === row.searched
       console.log(sameSearch);
+      console.log("----------")
       if (
        lessThanTwoMinutes&&idsDifferent&&sameSearch
       ) {
         msg = "NOT_UNIQUE_SEARCH"
       }
-    }
-    ))
+    })
       db.close();
       console.log(msg);
-    res.send(msg);
+      res.setHeader('Content-Type', 'application/json');
+    res.send({msg:}msg);
   })
 })
 // All remaining requests return the React app, so it can handle routing.

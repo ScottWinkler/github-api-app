@@ -18,7 +18,11 @@ export function logSearch(input, id_user) {
         fetch('/db', { method: 'POST', body: data, headers: { 'Content-Type': 'application/json' } })
             .then(data => {
                 console.log(data)
-                if (data === "NOT_UNIQUE_SEARCH") {
+                var body = data.body;
+                console.log(body);
+                var text = body.text();
+                console.log(text);
+                if (text === "NOT_UNIQUE_SEARCH") {
                     dispatch(homeError("NOT_UNIQUE_SEARCH"));
                 }
             })
