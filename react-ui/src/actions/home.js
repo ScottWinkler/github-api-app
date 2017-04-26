@@ -8,7 +8,7 @@ export function setActiveUser(user){
     }
 }
 
-export function logSearch(input, id_user) {
+export function logSearch(input, id_user,callback) {
     return (dispatch) => {
         var data = JSON.stringify({
             id_user: id_user,
@@ -21,6 +21,7 @@ export function logSearch(input, id_user) {
                         console.log(text);
                 if (text === "NOT_UNIQUE_SEARCH") {
                     dispatch(homeError("NOT_UNIQUE_SEARCH"));
+                    callback();
                 }
                 })
                 
@@ -31,7 +32,7 @@ export function logSearch(input, id_user) {
 export function userFetchData(input,id_user,callback) {
     return (dispatch) => {
         dispatch(homeLoading(true));
-        dispatch(logSearch(input,id_user));
+        dispatch(logSearch(input,id_user,callback));
         var gh = new GitHub();
         var name = gh.getUser(input);
         name.getProfile()
